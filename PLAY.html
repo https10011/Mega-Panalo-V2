@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Selection</title>
+    <style>
+        /* Reusing the modal CSS */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #1e2329;
+        }
+
+        .game {
+            padding: 1rem;
+            margin: 1rem;
+            background-color: #f0f0f0;
+            cursor: pointer;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: transparent;
+            display: none;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal {
+            background-color: white;
+            border-radius: 1rem;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: #ccc;
+            border: none;
+            color: #333;
+            font-size: 24px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-title {
+            color: #4a90e2;
+            font-size: 24px;
+            margin: 1.5rem 0;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 0 1rem 1rem;
+        }
+
+        .modal-button {
+            padding: 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .play-now {
+            background-color: #4a90e2;
+            color: white;
+        }
+
+        .free-trial {
+            background-color: #e6f0fd;
+            color: #4a90e2;
+        }
+    </style>
+</head>
+<body>
+    <!-- Game links -->
+    <div class="game" data-game="game1.html">Game 1</div>
+    <div class="game" data-game="game2.html">Game 2</div>
+    <div class="game" data-game="game3.html">Game 3</div>
+    <div class="game" data-game="game4.html">Game 4</div>
+    <div class="game" data-game="game5.html">Game 5</div>
+    <div class="game" data-game="game6.html">Game 6</div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal">
+            <button class="close-button" id="close-button">×</button>
+            <h2 class="modal-title">Please choose the game play</h2>
+            <div class="button-container">
+                <button class="modal-button play-now" id="play-now">Play now</button>
+                <button class="modal-button free-trial">Free Trial</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const games = document.querySelectorAll('.game');
+            const modalOverlay = document.getElementById('modal-overlay');
+            const closeButton = document.getElementById('close-button');
+            const playNowButton = document.getElementById('play-now');
+            let selectedGame = '';
+
+            // Show modal on game click
+            games.forEach(game => {
+                game.addEventListener('click', function() {
+                    selectedGame = this.getAttribute('data-game');
+                    modalOverlay.style.display = 'flex';
+                });
+            });
+
+            // Close modal
+            closeButton.addEventListener('click', function() {
+                modalOverlay.style.display = 'none';
+            });
+
+            // Redirect to game on "Play now"
+            playNowButton.addEventListener('click', function() {
+                window.location.href = selectedGame;
+            });
+        });
+    </script>
+</body>
+</html>
